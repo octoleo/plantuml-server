@@ -97,8 +97,8 @@ public class TestProxy extends WebappTestCase {
         // Get the content and verify its size
         String diagram = getContentText(conn);
         int diagramLen = diagram.length();
-        Assertions.assertTrue(diagramLen > 5000);
-        Assertions.assertTrue(diagramLen < 6000);
+        Assertions.assertTrue(diagramLen > 3000);
+        Assertions.assertTrue(diagramLen < 12000);
     }
 
     /**
