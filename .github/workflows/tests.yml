@@ -5,36 +5,6 @@ on:
   - pull_request
 
 jobs:
-  test-java-8-war-generation:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - uses: actions/setup-java@v3
-        with:
-          distribution: "zulu"
-          java-version: 8
-          check-latest: true
-          cache: "maven"
-
-      - name: Remove test code (not java 8 compatible)
-        run: rm -rf src/test
-
-      - name: Generate war file (including apache-jsp artifact)
-        run: mvn --batch-mode -f pom.jdk8.xml -D java.net.useSystemProxies=true -Dapache-jsp.scope=compile clean package
-
-      - name: Generate war file
-        run: mvn --batch-mode -f pom.jdk8.xml -D java.net.useSystemProxies=true clean package
-
-      - name: temporarily save generated files
-        uses: actions/upload-artifact@v4
-        with:
-          name: war-jre8
-          path: target/plantuml.war
-          retention-days: 1
-
   test-mvn-livecycle:
     runs-on: ubuntu-latest
     strategy:
